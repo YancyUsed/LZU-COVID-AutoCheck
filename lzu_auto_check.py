@@ -183,9 +183,9 @@ def submitCard():
 
     cardID = os.environ['CARDID']
     passwd = os.environ['PASSWORD']
-    sendKey = os.environ['SENDKEY']
+    # sendKey = os.environ['SENDKEY']
     # server酱接口
-    serverchanUrl = 'https://sctapi.ftqq.com/' + sendKey + '.send'
+    # serverchanUrl = 'https://sctapi.ftqq.com/' + sendKey + '.send'
 
     dayCok, cardID = getDailyToken(cardID, passwd)
     ST = getST(dayCok)
@@ -196,27 +196,27 @@ def submitCard():
 
     if info['code'] != 1:
         print(str(timeStamp)+" 未知错误，无法打卡!")
-        serverchanParameters = {
-            'title': ' 打卡失败！！！，请手动尝试。',
-            'desp': '### ' + str(timeStamp) + ' 未知错误，无法打卡!'
-        }
-        requests.get(serverchanUrl, serverchanParameters)
+#         serverchanParameters = {
+#             'title': ' 打卡失败！！！，请手动尝试。',
+#             'desp': '### ' + str(timeStamp) + ' 未知错误，无法打卡!'
+#         }
+#         requests.get(serverchanUrl, serverchanParameters)
         raise Exception(str(timeStamp)+" 未知错误，无法打卡!")
     response, _ = getSubmit(AuToken, dayCok, info, FilledInfo)
     if response['code'] == 1:
         print(str(timeStamp) + " 打卡成功，" + str(response) + "，疫情期间，记得保持身体健康哦!")
-        serverchanParameters = {
-            'title': ' 健康打卡成功',
-            'desp': '### ' + str(timeStamp) + ' 疫情期间，记得保持身体健康哦！'
-        }
-        requests.get(serverchanUrl, serverchanParameters)
+#         serverchanParameters = {
+#             'title': ' 健康打卡成功',
+#             'desp': '### ' + str(timeStamp) + ' 疫情期间，记得保持身体健康哦！'
+#         }
+#         requests.get(serverchanUrl, serverchanParameters)
     else:
         print(str(timeStamp) + "打卡失败, " + str(response) + "，请提交相关问题到issue中!")
-        serverchanParameters = {
-            'title': ' 打卡失败！！！，请手动尝试。',
-            'desp': '### ' + str(timeStamp) + " 打卡失败, " + str(response) + "，请提交相关问题到issue中!"
-        }
-        requests.get(serverchanUrl, serverchanParameters)
+#         serverchanParameters = {
+#             'title': ' 打卡失败！！！，请手动尝试。',
+#             'desp': '### ' + str(timeStamp) + " 打卡失败, " + str(response) + "，请提交相关问题到issue中!"
+#         }
+#         requests.get(serverchanUrl, serverchanParameters)
         raise Exception(str(timeStamp) + "打卡失败, " + str(response) + "，请提交相关问题到issue中!")
 
 
@@ -227,8 +227,8 @@ if __name__ == "__main__":
         raise Exception("未设置变量CARDID，请检查！")
     if not os.environ['PASSWORD']:
         raise Exception("未设置变量PASSWORD，请检查！")
-    if not os.environ['SENDKEY']:
-        raise Exception('未设置变量SENDKEY，请检查！')
+#     if not os.environ['SENDKEY']:
+#         raise Exception('未设置变量SENDKEY，请检查！')
 
     try:
         if len(sys.argv) > 1 and sys.argv[1] == 'delayrand':
