@@ -7,7 +7,7 @@ on:
   push:
   # 每天3点、6点、8点、10点进行尝试打卡，注意要把北京时间转为UTC时间再填入下面
   schedule:
-    - cron: '0 0,2,19,22 * * *'
+    - cron: '0 23,21,17,19 * * *'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,6 +39,6 @@ jobs:
         env:
           CARDID: ${{ secrets.CARDID }}
           PASSWORD: ${{ secrets.PASSWORD }}
-          SENDKEY: ${{ secrets.SENDKEY }}
+         # SENDKEY: ${{ secrets.SENDKEY }}
           TZ: Asia/Shanghai
         run: python lzu_auto_check.py
