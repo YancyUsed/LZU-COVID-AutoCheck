@@ -28,7 +28,7 @@ jobs:
       - name: '配置python环境'
         uses: actions/setup-python@main
         with:
-          python-version: '3.7'
+          python-version: '3.x'
 
       - name: '安装必要的python库'
         run: |
